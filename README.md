@@ -51,16 +51,15 @@ Modos de uso:
 ---
 
 # 🖼 Screenshots  
-*(adicione as imagens reais depois na pasta `/screenshots`)*
 
 ### ✔ Broker Catalog  
-![Broker Catalog](screenshots/brokers.png)
+![Broker Catalog](https://github.com/DanielLopes25/Project-API-Node-RED/blob/main/Picture%20Broker%20Catalog.png)
 
 ### ✔ Formulário de CEP  
 ![CEP Form](screenshots/cep-form.png)
 
 ### ✔ Resultado do CEP  
-![CEP Result](screenshots/cep-result.png)
+![CEP Result](https://github.com/DanielLopes25/Project-API-Node-RED/blob/main/Picture%20Flow%20Node%20RED.png)
 
 ---
 
