@@ -2,7 +2,6 @@
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![Node-RED](https://img.shields.io/badge/Node--RED-API%20Flows-red)
 ![BrazilAPI](https://img.shields.io/badge/BrazilAPI-v2-blue)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 Aplicação desenvolvida como **desafio**, utilizando **Node-RED** para integração com a **BrazilAPI**, criando um mini-sistema web com duas funcionalidades principais:
 
