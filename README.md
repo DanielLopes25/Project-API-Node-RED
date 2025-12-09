@@ -140,7 +140,10 @@ http://localhost:1880/cep-form
 
 
 Daniel de Sales Lopes
+
 📍 Betim — MG
+
 📧 danieldesales.mct@gmail.com
+
 🔗 https://www.linkedin.com/in/danielsaleslopes/
 
