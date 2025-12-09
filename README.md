@@ -55,21 +55,12 @@ Modos de uso:
 ### ✔ Broker Catalog  
 ![Broker Catalog](https://github.com/DanielLopes25/Project-API-Node-RED/blob/main/Picture%20Broker%20Catalog.png)
 
-### ✔ Formulário de CEP  
-![CEP Form](screenshots/cep-form.png)
+### ✔ Resultado de CEP  
+![CEP Result](https://github.com/DanielLopes25/Project-API-Node-RED/blob/main/CEP%20Result.png)
 
-### ✔ Resultado do CEP  
-![CEP Result](https://github.com/DanielLopes25/Project-API-Node-RED/blob/main/Picture%20Flow%20Node%20RED.png)
+### ✔ Flow Node-RED 
+![Flow node-RED](https://github.com/DanielLopes25/Project-API-Node-RED/blob/main/Picture%20Flow%20Node%20RED.png)
 
----
-
-# 📂 Estrutura do Repositório
-
-node-red-brazilapi-challenge/
-│
-├── flows.json # Fluxos exportados do Node-RED
-├── README.md # Documentação completa
-└── screenshots/ # Imagens do projeto (opcional)
 
 
 
@@ -124,7 +115,6 @@ GET	/brokers	Lista corretoras da CVM com busca em tempo real
 Método	Rota	Descrição
 GET	/cep-form	Formulário de busca de CEP
 GET	/cep-lookup	Busca CEP via querystring
-GET	/cep/:cep	Busca CEP via parâmetro de rota
 
 ⚙️ Testes Manuais (Recomendados)
 ✔ Broker Catalog
