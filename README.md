@@ -76,19 +76,19 @@ Para rodar o projeto, instale:
 Um navegador moderno (Chrome, Edge, Firefox…)
 
 🔧 Instalação
+
+
 1️⃣ Clone o repositório
 bash
 git clone https://github.com/DanielLopes25/Project-API-Node-RED
 
 
 2️⃣ Acesse o projeto
-bash
-cd <Project-API-Node-RED>
+bash cd <Project-API-Node-RED>
 
 
 3️⃣ Inicie o Node-RED
-bash
-node-red
+bash node-red
 
 
 4️⃣ Acesse no navegador
