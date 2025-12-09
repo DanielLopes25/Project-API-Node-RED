@@ -78,20 +78,24 @@ Um navegador moderno (Chrome, Edge, Firefox…)
 🔧 Instalação
 1️⃣ Clone o repositório
 bash
-Copiar código
-git clone https://github.com/<seu-usuario>/<nome-repositorio>.git
+git clone https://github.com/DanielLopes25/Project-API-Node-RED
+
+
 2️⃣ Acesse o projeto
 bash
-Copiar código
-cd <nome-repositorio>
+cd <Project-API-Node-RED>
+
+
 3️⃣ Inicie o Node-RED
 bash
-Copiar código
 node-red
+
+
 4️⃣ Acesse no navegador
-arduino
 Copiar código
 http://localhost:1880
+
+
 📥 Importando os Fluxos
 Acesse o Node-RED
 
