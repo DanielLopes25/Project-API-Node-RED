@@ -1,5 +1,384 @@
 [
     {
+        "id": "cep-flow-tab",
+        "type": "tab",
+        "label": "CEP Flow",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "9fb8a8dc066dd5e2",
+        "type": "tab",
+        "label": "Project API Application",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f0c8e74702355806",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "cep-form-in",
+        "type": "http in",
+        "z": "cep-flow-tab",
+        "name": "CEP Form",
+        "url": "/cep-form",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "cep-form-template"
+            ]
+        ]
+    },
+    {
+        "id": "cep-form-template",
+        "type": "template",
+        "z": "cep-flow-tab",
+        "name": "CEP Form HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Zip Code Searcher</title>\n  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\"/>\n</head>\n<body class=\"bg-dark text-light\">\n  <div class=\"container py-5\">\n    <h1 class=\"mb-3\">Zip Code Searcher</h1>\n    <form action=\"/cep-lookup\" method=\"get\" class=\"row g-3\">\n      <div class=\"col-md-4\">\n        <label for=\"cep\" class=\"form-label\">CEP</label>\n        <input type=\"text\" class=\"form-control\" id=\"cep\" name=\"cep\" placeholder=\"89010025\" required />\n      </div>\n      <div class=\"col-12\">\n        <button type=\"submit\" class=\"btn btn-primary mt-2\">Buscar CEP</button>\n      </div>\n    </form>\n\n    <hr class=\"border-secondary my-4\"/>\n\n    <h2 class=\"h5\">Ou use a rota direta</h2>\n    <p class=\"text-secondary\">Exemplo: <code>/cep/89010025</code></p>\n  </div>\n</body>\n</html>\n",
+        "output": "str",
+        "x": 330,
+        "y": 80,
+        "wires": [
+            [
+                "cep-form-response"
+            ]
+        ]
+    },
+    {
+        "id": "cep-form-response",
+        "type": "http response",
+        "z": "cep-flow-tab",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 540,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "cep-lookup-in",
+        "type": "http in",
+        "z": "cep-flow-tab",
+        "name": "CEP via form",
+        "url": "/cep-lookup",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "build-cep-from-query"
+            ]
+        ]
+    },
+    {
+        "id": "build-cep-from-query",
+        "type": "function",
+        "z": "cep-flow-tab",
+        "name": "Build CEP URL (query)",
+        "func": "const cep = msg.req.query.cep; // ?cep=xxxxx\nif (!cep) {\n    node.error(\"CEP não informado na query\", msg);\n    return;\n}\nmsg.method = \"GET\";\nmsg.url = `https://brasilapi.com.br/api/cep/v2/${cep}`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "cep-http-request"
+            ]
+        ]
+    },
+    {
+        "id": "cep-route-in",
+        "type": "http in",
+        "z": "cep-flow-tab",
+        "name": "CEP via rota",
+        "url": "/cep/:cep",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 260,
+        "wires": [
+            [
+                "build-cep-from-params"
+            ]
+        ]
+    },
+    {
+        "id": "build-cep-from-params",
+        "type": "function",
+        "z": "cep-flow-tab",
+        "name": "Build CEP URL (params)",
+        "func": "const cep = msg.req.params.cep; // /cep/:cep\nif (!cep) {\n    node.error(\"CEP não informado na rota\", msg);\n    return;\n}\nmsg.method = \"GET\";\nmsg.url = `https://brasilapi.com.br/api/cep/v2/${cep}`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "cep-http-request"
+            ]
+        ]
+    },
+    {
+        "id": "cep-http-request",
+        "type": "http request",
+        "z": "cep-flow-tab",
+        "name": "BrazilAPI CEP v2",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "cep-template"
+            ]
+        ]
+    },
+    {
+        "id": "cep-template",
+        "type": "template",
+        "z": "cep-flow-tab",
+        "name": "CEP HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>CEP {{payload.cep}}</title>\n  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\"/>\n</head>\n<body class=\"bg-dark text-light\">\n  <div class=\"container py-4\">\n\n    <h1 class=\"mb-3\">CEP {{payload.cep}}</h1>\n\n    <div class=\"card bg-secondary bg-opacity-10 border-light mb-3\">\n      <div class=\"card-body\">\n        <p><strong>Rua:</strong> {{payload.street}}</p>\n        <p><strong>Bairro:</strong> {{payload.neighborhood}}</p>\n        <p><strong>Cidade/UF:</strong> {{payload.city}} / {{payload.state}}</p>\n\n        {{#payload.location}}\n        <p><strong>Coordenadas:</strong></p>\n        <ul>\n          <li>Latitude: {{payload.location.coordinates.latitude}}</li>\n          <li>Longitude: {{payload.location.coordinates.longitude}}</li>\n        </ul>\n        {{/payload.location}}\n      </div>\n    </div>\n\n    <a href=\"/cep-form\" class=\"btn btn-outline-light mt-3\">Buscar outro CEP</a>\n  </div>\n</body>\n</html>\n",
+        "output": "str",
+        "x": 840,
+        "y": 220,
+        "wires": [
+            [
+                "cep-response"
+            ]
+        ]
+    },
+    {
+        "id": "cep-response",
+        "type": "http response",
+        "z": "cep-flow-tab",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1050,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "1d012e4e4c3abd8c",
+        "type": "http in",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "",
+        "url": "/brokers",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "914e5f1608bcad54"
+            ]
+        ]
+    },
+    {
+        "id": "914e5f1608bcad54",
+        "type": "http request",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://brasilapi.com.br/api/cvm/corretoras/v1",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 320,
+        "y": 40,
+        "wires": [
+            [
+                "225f166f7a035bde"
+            ]
+        ]
+    },
+    {
+        "id": "225f166f7a035bde",
+        "type": "template",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>Broker Catalog - BrazilAPI</title>\n  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\"/>\n\n  <style>\n    body {\n      background: #f5f7fa;\n      color: #333;\n    }\n\n    .card-box {\n      background: #ffffff;\n      border-radius: 12px;\n      padding: 20px;\n      box-shadow: 0 2px 10px rgba(0,0,0,0.08);\n      margin-bottom: 20px;\n    }\n\n    .list-group-item {\n      background-color: #ffffff !important;\n      color: #333 !important;\n      border: 1px solid #ececec;\n    }\n\n    .list-group-item:hover {\n      background: #f0f0f0 !important;\n    }\n\n    #searchBox {\n      margin-bottom: 20px;\n      border-radius: 8px;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container py-4\">\n\n    <div class=\"card-box\">\n      <h1 class=\"mb-3\">BROKER CATALOG</h1>\n      <p class=\"text-secondary\">\n        Dados em tempo real da <a href=\"https://brasilapi.com.br/\" target=\"_blank\">BrazilAPI</a>.\n      </p>\n\n        <a href=\"/cep-form\" class=\"btn btn-primary mt-4\">Go to Zip Code Searcher</a>\n\n      <input\n        type=\"text\"\n        id=\"searchBox\"\n        class=\"form-control\"\n        placeholder=\"Buscar por nome, cidade ou CNPJ...\"\n      />\n\n      <!-- Lista de Corretoras -->\n      <ul class=\"list-group\" id=\"brokerList\">\n        {{#payload}}\n        <li class=\"list-group-item broker-item\">\n          <strong class=\"broker-name\">{{nome_comercial}}</strong><br>\n          <span class=\"broker-info\">{{municipio}} / {{cnpj}}</span>\n        </li>\n        {{/payload}}\n      </ul>\n\n      \n    </div>\n    <p class=\"text-secondary mt-4\">\n      Application by <a href=\"https://www.linkedin.com/in/danielsaleslopes\" target=\"_blank\">Daniel Lopes</a>.\n    </p>\n  </div>\n\n  \n  <script>\n    const searchInput = document.getElementById(\"searchBox\");\n\n    searchInput.addEventListener(\"keyup\", function () {\n      const filter = searchInput.value.toLowerCase();\n      const items = document.querySelectorAll(\".broker-item\");\n\n      items.forEach(item => {\n        const text = item.innerText.toLowerCase();\n        item.style.display = text.includes(filter) ? \"\" : \"none\";\n      });\n    });\n  </script>\n</body>\n</html>\n",
+        "output": "str",
+        "x": 490,
+        "y": 40,
+        "wires": [
+            [
+                "ec81139e949ecfbb"
+            ]
+        ]
+    },
+    {
+        "id": "ec81139e949ecfbb",
+        "type": "http response",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "526ef30819ff3a67",
+        "type": "http in",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "CEP Form",
+        "url": "/cep-form",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "9bfb7b7a81809b7c"
+            ]
+        ]
+    },
+    {
         "id": "9bfb7b7a81809b7c",
         "type": "template",
         "z": "9fb8a8dc066dd5e2",
@@ -17,5 +396,146 @@
                 "3b8996f17396c2f2"
             ]
         ]
+    },
+    {
+        "id": "3b8996f17396c2f2",
+        "type": "http response",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 490,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "69de7c6fc854f74b",
+        "type": "http in",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "CEP via form",
+        "url": "/cep-lookup",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "fa30bc892670ba48"
+            ]
+        ]
+    },
+    {
+        "id": "fa30bc892670ba48",
+        "type": "function",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "Build CEP URL (query)",
+        "func": "const cep = msg.req.query.cep; // ?cep=xxxxx\nif (!cep) {\n    node.error(\"CEP não informado na query\", msg);\n    return;\n}\nmsg.method = \"GET\";\nmsg.url = `https://brasilapi.com.br/api/cep/v2/${cep}`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "b1d744109b4bd1bc"
+            ]
+        ]
+    },
+    {
+        "id": "34ac60929ddb91ef",
+        "type": "http in",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "CEP via rota",
+        "url": "/cep/:cep",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "02de1bdfbb6b3bd5"
+            ]
+        ]
+    },
+    {
+        "id": "02de1bdfbb6b3bd5",
+        "type": "function",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "Build CEP URL (params)",
+        "func": "const cep = msg.req.params.cep; // /cep/:cep\nif (!cep) {\n    node.error(\"CEP não informado na rota\", msg);\n    return;\n}\nmsg.method = \"GET\";\nmsg.url = `https://brasilapi.com.br/api/cep/v2/${cep}`;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "b1d744109b4bd1bc"
+            ]
+        ]
+    },
+    {
+        "id": "b1d744109b4bd1bc",
+        "type": "http request",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "BrazilAPI CEP v2",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 570,
+        "y": 180,
+        "wires": [
+            [
+                "470520e12962dd6f"
+            ]
+        ]
+    },
+    {
+        "id": "470520e12962dd6f",
+        "type": "template",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "CEP HTML",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>CEP {{payload.cep}}</title>\n  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\"/>\n\n  <style>\n    body {\n      background: #f5f7fa;\n      color: #333;\n    }\n\n    .card-box {\n      background: #ffffff;\n      border-radius: 12px;\n      padding: 20px;\n      box-shadow: 0 2px 10px rgba(0,0,0,0.08);\n      margin-top: 20px;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container py-3\">\n\n    <h1 class=\"mb-3\">CEP {{payload.cep}}</h1>\n\n    <div class=\"card-box\">\n      <div class=\"card-body\">\n        <p><strong>Rua:</strong> {{payload.street}}</p>\n        <p><strong>Bairro:</strong> {{payload.neighborhood}}</p>\n        <p><strong>Cidade/UF:</strong> {{payload.city}} / {{payload.state}}</p>\n\n        \n\n        <div class=\"mt-4 d-flex gap-2\">\n          <a href=\"/cep-form\" class=\"btn btn-primary\">Search CEP</a>\n          <a href=\"/brokers\" class=\"btn btn-secondary\">Back to Brokers Catalog</a>\n        </div>\n      </div>\n    </div>\n    <p class=\"text-secondary mt-4\">\n      Application by <a href=\"https://www.linkedin.com/in/danielsaleslopes\" target=\"_blank\">Daniel Lopes</a>.\n    </p>\n  </div>\n</body>\n</html>\n",
+        "output": "str",
+        "x": 750,
+        "y": 180,
+        "wires": [
+            [
+                "4919cfcbc5e8a550"
+            ]
+        ]
+    },
+    {
+        "id": "4919cfcbc5e8a550",
+        "type": "http response",
+        "z": "9fb8a8dc066dd5e2",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 890,
+        "y": 180,
+        "wires": []
     }
 ]
